@@ -93,6 +93,14 @@ def normalize_listing(raw: dict) -> dict | None:
         if not isinstance(eligibility, list):
             eligibility = []
 
+        desc = (raw.get("description") or "").strip()
+        if not desc:
+            cat_display = category.replace("_", " ").title()
+            mode_text = "online" if raw_mode == "ONLINE" else (f"in-person in {city}" if city else "in-person") if raw_mode == "OFFLINE" else "in hybrid mode"
+            org_phrase = f" organized by {(raw.get('organiser') or '').strip()}" if raw.get("organiser") else ""
+            prize_phrase = f" Features prize pool of {prize_label}." if prize_label and prize_label != "See listing" else ""
+            desc = f"Verified {cat_display.lower()}{org_phrase}, conducted {mode_text}.{prize_phrase} Hosted on {raw.get('platform') or 'official portal'}."
+
         # ── Build normalized record ──────────────────────────────────
         return {
             "external_id": external_id,
@@ -113,7 +121,7 @@ def normalize_listing(raw: dict) -> dict | None:
             "fee": raw.get("fee"),
             "eligibility": eligibility,
             "registered_count": raw.get("registered"),
-            "description": raw.get("description"),
+            "description": desc,
             "is_expired": False,
             "status": "approved",  # Brabble listings auto-approved
         }

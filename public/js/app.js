@@ -1186,7 +1186,7 @@ class OpportunityApp {
               </svg>
               ${this.escapeHtml(organizer)}
             </div>
-            <p class="card-description">${this.escapeHtml(opp.description || "No description provided.")}</p>
+            <p class="card-description">${this.escapeHtml(opp.description || `${category.charAt(0).toUpperCase() + category.slice(1).toLowerCase()} organized by ${organizer}. Hosted on ${opp.platform || 'official portal'}.`)}</p>
 
             <!-- Metadata List with Icons (Internshala <ul> Style) -->
             <ul class="card-metadata-list">
@@ -1531,6 +1531,23 @@ class OpportunityApp {
 
       const totalEl = document.getElementById("oppsTotalCount");
       if (totalEl) totalEl.textContent = total;
+
+      if (stats.categories) {
+        const catMap = {
+          all: `All Opportunities (${stats.categories.all || total})`,
+          hackathon: `Hackathons (${stats.categories.hackathons || 0})`,
+          contest: `Coding Contests (${stats.categories.coding || 0})`,
+          competition: `Competitions (${stats.categories.competitions || 0})`,
+          innovation: `Design & Innovation (${stats.categories.design || 0})`,
+          case_study: `Case Studies & Quizzes (${stats.categories.quizzes || 0})`
+        };
+        document.querySelectorAll(".filter-pill[data-type]").forEach(pill => {
+          const type = pill.dataset.type;
+          if (catMap[type]) {
+            pill.textContent = catMap[type];
+          }
+        });
+      }
     } catch (e) {
       // Silent fallback if real stats endpoint is temporarily unavailable
     }

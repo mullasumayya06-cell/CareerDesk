@@ -13,6 +13,13 @@ const ApiClient = {
 
   clearCache() {
     this._cache.clear();
+    try {
+      Object.keys(sessionStorage).forEach(k => {
+        if (k.startsWith("cd_opps_") || k.startsWith("cd_stats_")) {
+          sessionStorage.removeItem(k);
+        }
+      });
+    } catch (_) {}
   },
 
   handleApiError(error, context = {}) {

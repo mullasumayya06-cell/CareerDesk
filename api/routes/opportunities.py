@@ -58,7 +58,7 @@ def list_opportunities():
             "id, external_id, title, organiser, category, kind, platform, "
             "official_url, share_url, deadline_utc, mode, city, "
             "prize_label, prize_inr, team_size, fee, eligibility, "
-            "registered_count, is_expired, first_seen_at",
+            "registered_count, description, is_expired, first_seen_at",
             count="exact",
         ).eq("status", "approved").eq("is_expired", False)
 
