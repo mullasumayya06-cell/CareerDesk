@@ -68,6 +68,20 @@ class AuthManager {
         } catch (_) {}
       }
 
+      // Check for OAuth errors returned in URL query or hash
+      const urlParams = new URLSearchParams(window.location.search);
+      const hashParams = new URLSearchParams(window.location.hash.startsWith("#") ? window.location.hash.slice(1) : window.location.hash);
+      const authError = urlParams.get("error_description") || urlParams.get("error") || hashParams.get("error_description") || hashParams.get("error");
+      if (authError) {
+        const readableError = decodeURIComponent(authError).replace(/\+/g, " ");
+        setTimeout(() => {
+          window.app?.showToast?.(`Sign in failed: ${readableError}`, "error");
+        }, 500);
+        try {
+          history.replaceState(null, "", window.location.pathname);
+        } catch (_) {}
+      }
+
     } catch (err) {
       if (window.AppLogger) {
         window.AppLogger.error(err, { operation: "auth_init" });

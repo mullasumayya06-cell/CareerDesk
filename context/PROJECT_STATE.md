@@ -132,7 +132,7 @@ Next step: Phase 9 (Vercel Deployment & Cron Automation).
   * **Phase 10 (Legal Compliance, Privacy Shield, WCAG 2.2 Accessibility & Anti-Liability Overhaul)**:
     * Implemented full legal suite: `public/privacy.html` (DPDP Act 2023, GDPR, CCPA compliant), `public/terms.html` (Section 79 IT Act 2000 safe harbor intermediary status, 48h notice-and-takedown SLA), `public/cookies.html` (comprehensive storage inventory), and `public/refund.html` (₹0 platform service fee disclosure).
     * Implemented Cookie & Local Storage consent banner (`#cookieConsentBanner`) with persistent preferences in `localStorage`.
-    * Designed statutory Grievance Redressal mechanism: Publisher: OpportunityOS Technologies, Bengaluru; Support: `support@opportunityos.in`; Grievance Officer: Haries Hussain (`grievance@opportunityos.in`) with 48h SLA.
+    * Designed statutory Grievance Redressal mechanism: Publisher: CareerDesk Technologies, Nandyal, Andhra Pradesh; Support: `sumayyamulla30@gmail.com`; Grievance Officer: Sumayya (`sumayyamulla30@gmail.com`) with 48h SLA.
     * Added user Right to Erasure cascade deletion endpoint: `DELETE /api/auth/profile` in `api/routes/auth.py`, wrapped in `ApiClient.deleteAccount()` and triggered via user profile menu with explicit confirmation modal.
     * Enforced statutory submission consent checkbox (`#submissionConsent`) on community event submission form.
     * Overhauled accessibility to WCAG 2.2 AA standard: added `.skip-link`, high-contrast `*:focus-visible` rings, descriptive `aria-label`s on buttons, landmark roles (`role="banner"`, `role="navigation"`, `role="main"`, `role="contentinfo"`, `role="region"`).
