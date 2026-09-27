@@ -734,7 +734,12 @@ class OpportunityApp {
           const roleEl = document.getElementById("navUserRole");
           if (nameEl) nameEl.textContent = fullName;
           if (avatarEl) avatarEl.src = avatarUrl;
-          if (roleEl) roleEl.textContent = "Member";
+          if (roleEl) {
+            const isAdmin = user.role === "admin";
+            roleEl.textContent = isAdmin ? "👑 Admin" : "Member";
+            roleEl.style.color = isAdmin ? "#D97706" : "var(--brand-primary)";
+            roleEl.style.fontWeight = isAdmin ? "700" : "500";
+          }
         }
 
         // Sync Mobile Header Avatar Trigger
@@ -768,8 +773,15 @@ class OpportunityApp {
         if (drawerName) drawerName.textContent = fullName;
         if (drawerEmail) drawerEmail.textContent = email;
         if (drawerRoleBadge) {
-          drawerRoleBadge.textContent = "Google Verified";
-          drawerRoleBadge.className = "badge-role-tag badge-role-student";
+          const isAdmin = user.role === "admin";
+          drawerRoleBadge.textContent = isAdmin ? "👑 Administrator" : "Google Verified";
+          drawerRoleBadge.className = isAdmin ? "badge-role-tag badge-role-admin" : "badge-role-tag badge-role-student";
+          if (isAdmin) {
+            drawerRoleBadge.style.backgroundColor = "#FEF3C7";
+            drawerRoleBadge.style.color = "#D97706";
+            drawerRoleBadge.style.fontWeight = "700";
+            drawerRoleBadge.style.borderColor = "#FDE68A";
+          }
         }
         if (drawerCollege) {
           if (user.college_name && user.college_name.trim()) {
